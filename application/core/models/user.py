@@ -1,10 +1,9 @@
 from datetime import datetime
 
 from sqlalchemy import func, String
+from sqlalchemy.orm import Mapped, mapped_column
 
 from core.models.base import Base
-
-from sqlalchemy.orm import Mapped, mapped_column
 
 
 class User(Base):
