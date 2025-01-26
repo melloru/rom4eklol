@@ -1,3 +1,7 @@
-__all__ = ("Base",)
+__all__ = (
+    "BaseRepo",
+    "UserRepo",
+)
 
-from .base import Base
+from .base import BaseRepo
+from .user import UserRepo
