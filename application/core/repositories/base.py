@@ -10,13 +10,16 @@ T = TypeVar("T", bound=Base)
 
 
 class BaseRepo(Generic[T]):
-    model: Type[T]
+    def __init__(
+        self,
+        model: Type[T],
+    ):
+        self.model = model
 
-    @classmethod
     async def get_all(
-        cls,
+        self,
         session: AsyncSession,
-    ) -> Sequence[T]:
-        stmt = select(cls.model)
+    ):
+        stmt = select(self.model)
         result = await session.execute(stmt)
         return result.scalars().all()
