@@ -31,7 +31,7 @@ class DatabaseHelper:
         await self.engine.dispose()
 
     async def session_getter(self) -> AsyncGenerator[AsyncSession, None]:
-        async with self.session_factory as session:
+        async with self.session_factory() as session:
             yield session
 
 
