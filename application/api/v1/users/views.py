@@ -28,3 +28,4 @@ async def create_user(
     user: UserCreateSchema,
 ):
     created_user = await UserService.create_user(session=session, user=user)
+    return created_user
