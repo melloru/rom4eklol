@@ -4,4 +4,4 @@ from core.models import Base
 
 
 class User(SQLAlchemyBaseUserTable[int], Base):
-    pass
+    __tablename__ = "users"
