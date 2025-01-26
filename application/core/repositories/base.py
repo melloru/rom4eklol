@@ -1,5 +1,7 @@
 from typing import Type, TypeVar, Generic, Sequence
 
+from pydantic import BaseModel as PydanticBaseModel
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -20,3 +22,14 @@ class BaseRepo(Generic[T]):
         stmt = select(cls.model)
         result = await session.execute(stmt)
         return result.scalars().all()
+
+    @classmethod
+    async def create(
+        cls,
+        session: AsyncSession,
+        value: PydanticBaseModel,
+    ) -> T:
+        new_entry = cls.model(**value.model_dump())
+        session.add(new_entry)
+        await session.commit()
+        return new_entry
