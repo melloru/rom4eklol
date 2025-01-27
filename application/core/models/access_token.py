@@ -25,5 +25,5 @@ class AccessToken(Base, SQLAlchemyBaseAccessTokenTable[int]):
     )
 
     @classmethod
-    async def get_user_db(cls, session: "AsyncSession"):
-        yield SQLAlchemyAccessTokenDatabase(session, AccessToken)
+    def get_db(cls, session: "AsyncSession"):
+        return SQLAlchemyAccessTokenDatabase(session, cls)
