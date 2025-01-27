@@ -16,6 +16,8 @@ if TYPE_CHECKING:
 
 
 class AccessToken(Base, SQLAlchemyBaseAccessTokenTable[int]):
+    __tablename__ = "accesstokens"
+
     user_id: Mapped[int] = mapped_column(
         Integer,
         ForeignKey("users.id", ondelete="cascade"),
@@ -23,5 +25,5 @@ class AccessToken(Base, SQLAlchemyBaseAccessTokenTable[int]):
     )
 
     @classmethod
-    async def get_user_db(cls, session: AsyncSession):
+    async def get_user_db(cls, session: "AsyncSession"):
         yield SQLAlchemyAccessTokenDatabase(session, AccessToken)
